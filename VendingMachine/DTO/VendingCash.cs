@@ -27,7 +27,7 @@ namespace VendingMachine
             {
                 if (internalCash3.ContainsKey(coin))
                 {
-                    internalCash3[coin] = internalCash[coin] + 1;
+                    internalCash3[coin] = internalCash3[coin] + 1;
                 }
                 else
                     internalCash3.Add(coin, 1);
