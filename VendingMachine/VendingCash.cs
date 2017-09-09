@@ -100,9 +100,5 @@ namespace VendingMachine
 
             return false;
         }
-
-
     }
-
-
 }
