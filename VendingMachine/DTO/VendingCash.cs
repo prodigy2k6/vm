@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using VendingMachine.DTO;
+using NLog;
 
 namespace VendingMachine
 {
 	public class VendingCash
 	{
         internal SortedDictionary<Denomination, int> internalCash { get; set; }
+
+	    private Logger _logger = LogManager.GetCurrentClassLogger(); 
 
 		public VendingCash()
 		{
@@ -18,12 +21,16 @@ namespace VendingMachine
         {
 			foreach (var coin in coins)
 			{
-				if (internalCash.ContainsKey(coin))
-				{
-                    internalCash[coin]++;
-				}
-				else
-					internalCash.Add(coin, 1);
+			    if (internalCash.ContainsKey(coin))
+			    {
+			        internalCash[coin]++;
+			        _logger.Debug($"Adding {coin.name} coin to existing denomination");
+			    }
+			    else
+			    {
+			        internalCash.Add(coin, 1);
+			        _logger.Debug($"Adding new {coin.name} coin to cash");
+                }
 			}
         }
 			
@@ -53,8 +60,27 @@ namespace VendingMachine
         {
             var changeToReturn = new List<Denomination>();
 
+            
 
-            //var dict = internalCash
+            bool calcChange = false;
+
+            foreach (var coin in internalCash.Where(x=> x.Value > 0))
+            {
+                var currentCoinCount = coin.Value;
+                var allocatedCoins = 0;
+
+                while (!calcChange && changeRequired - coin.Value > 0)
+                {
+                    if (changeRequired - coin.Value == 1)
+                    {
+                        
+                    }
+                }
+                
+
+            }
+
+
 
             return true;
         }
