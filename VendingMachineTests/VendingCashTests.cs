@@ -89,5 +89,35 @@ namespace VendingMachineTest
             vendingCash.internalCash.Values.ElementAt(6).Should().Be(1);
             vendingCash.internalCash.Values.ElementAt(7).Should().Be(2);
         }
+
+        [TestCase(1)]
+        [TestCase(1.30)]
+        [TestCase(3.20)]
+        [TestCase(0.10)]
+        [TestCase(0.03)]
+        public void VendingCash_GetChange_ChangeAvailableTwoPoundsExact_Success(decimal payment)
+        {
+            var vendingCash = new VendingCash();
+
+            vendingCash.processNewCoins(new List<Denomination>
+            {
+                new FivePence(),
+                new FiftyPence(),
+                new Pound(),
+                new TenPence(),
+                new TwentyPence(),
+                new Penny(),
+                new TwoPence(),
+                new Pound(),
+                new Penny(),
+                new TwoPound(),
+                new FiftyPence(),
+                new Pound(),
+                new FivePence()
+            });
+
+            vendingCash.canGetChange(payment).Should().BeTrue();
+
+        }
     }
 }
