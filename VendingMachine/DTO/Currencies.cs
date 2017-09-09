@@ -5,58 +5,58 @@ namespace VendingMachine.DTO
 {
 	public class Pound : Denomination
 	{
-		public override DenominationNames name => DenominationNames.Pound;
+		public override DenominationNames Name => DenominationNames.Pound;
 
-	    public override decimal value => 1.00m;
+	    public override decimal Value => 1.00m;
 	}
 
 	public class FiftyPence : Denomination
 	{
-        public override DenominationNames name => DenominationNames.FiftyPence;
+        public override DenominationNames Name => DenominationNames.FiftyPence;
 
-        public override decimal value => 0.50m;
+        public override decimal Value => 0.50m;
 	}
 
 	public class TwoPound : Denomination
 	{
-		public override DenominationNames name => DenominationNames.TwoPound;
+		public override DenominationNames Name => DenominationNames.TwoPound;
 
-	    public override decimal value => 2.00m;
+	    public override decimal Value => 2.00m;
 	}
 
 	public class TwentyPence : Denomination
 	{
-		public override DenominationNames name => DenominationNames.TwentyPence;
+		public override DenominationNames Name => DenominationNames.TwentyPence;
 
-	    public override decimal value => 0.20m;
+	    public override decimal Value => 0.20m;
 	}
 
 	public class TenPence : Denomination
 	{
-		public override DenominationNames name => DenominationNames.TenPence;
+		public override DenominationNames Name => DenominationNames.TenPence;
 
-	    public override decimal value => 0.10m;
+	    public override decimal Value => 0.10m;
 	}
 
 	public class FivePence : Denomination
 	{
-		public override DenominationNames name => DenominationNames.FivePence;
+		public override DenominationNames Name => DenominationNames.FivePence;
 
-	    public override decimal value => 0.05m;
+	    public override decimal Value => 0.05m;
 	}
 
 	public class TwoPence : Denomination
 	{
-		public override DenominationNames name => DenominationNames.TwoPence;
+		public override DenominationNames Name => DenominationNames.TwoPence;
 
-	    public override decimal value => 0.02m;
+	    public override decimal Value => 0.02m;
 	}
 
 	public class Penny : Denomination
 	{
-		public override DenominationNames name => DenominationNames.Penny;
+		public override DenominationNames Name => DenominationNames.Penny;
 
-	    public override decimal value => 0.01m;
+	    public override decimal Value => 0.01m;
 	}
 
     public class Currency

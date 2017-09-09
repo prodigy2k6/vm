@@ -7,10 +7,10 @@ namespace VendingMachine.DTO
     {
         public int Compare(Denomination a, Denomination b)
         {
-            if (a.value == b.value)
+            if (a.Value == b.Value)
                 return 0;
 
-            if (a.value > b.value)
+            if (a.Value > b.Value)
                 return -1;
 
             return 1;

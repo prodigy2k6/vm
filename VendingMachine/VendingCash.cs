@@ -24,19 +24,19 @@ namespace VendingMachine
                 if (InternalCash.ContainsKey(coin))
                 {
                     InternalCash[coin]++;
-                    _logger.Debug($"Adding {coin.name} coin to existing denomination");
+                    _logger.Debug($"Adding {coin.Name} coin to existing denomination");
                 }
                 else
                 {
                     InternalCash.Add(coin, 1);
-                    _logger.Debug($"Adding new {coin.name} coin to cash");
+                    _logger.Debug($"Adding new {coin.Name} coin to cash");
                 }
             }
         }
 
         public decimal CurrentTotal()
         {
-            return InternalCash.Select(x => x.Key.value * x.Value).Sum();
+            return InternalCash.Select(x => x.Key.Value * x.Value).Sum();
         }
 
         public void RemoveCoins(IEnumerable<Denomination> coins)
@@ -46,13 +46,13 @@ namespace VendingMachine
                 if (InternalCash.ContainsKey(coin))
                 {
                     if (InternalCash[coin] < 1)
-                        throw new Exception($"Not enough {coin.name} to deduct from machine");
+                        throw new Exception($"Not enough {coin.Name} to deduct from machine");
 
                     InternalCash[coin]--;
-                    _logger.Debug($"{coin.name} deducted. {InternalCash[coin]} coins remain.");
+                    _logger.Debug($"{coin.Name} deducted. {InternalCash[coin]} coins remain.");
                 }
                 else
-                    throw new Exception($"No {coin.name} available in machine");
+                    throw new Exception($"No {coin.Name} available in machine");
             }
         }
 
@@ -64,18 +64,18 @@ namespace VendingMachine
 
             foreach (var coin in InternalCash.Where(x => x.Value > 0))
             {
-                _logger.Debug($"'{coin.Key.name}' {coin.Value} Coins available");
+                _logger.Debug($"'{coin.Key.Name}' {coin.Value} Coins available");
                 var currentCoinCount = coin.Value;
                 var allocatedCoins = 0;
 
-                while (changeRequired - coin.Key.value >= 0 && currentCoinCount > 0)
+                while (changeRequired - coin.Key.Value >= 0 && currentCoinCount > 0)
                 {
-                    changeRequired = changeRequired - coin.Key.value;
+                    changeRequired = changeRequired - coin.Key.Value;
                     allocatedCoins += 1;
                     currentCoinCount -= 1;
 
-                    _logger.Debug($"1 '{coin.Key.name}' coin allocated");
-                    _logger.Debug($"'{coin.Key.name}' coins remaining = {currentCoinCount}");
+                    _logger.Debug($"1 '{coin.Key.Name}' coin allocated");
+                    _logger.Debug($"'{coin.Key.Name}' coins remaining = {currentCoinCount}");
                     _logger.Debug($"Remaining change to acquire = {changeRequired}");
 
                 }

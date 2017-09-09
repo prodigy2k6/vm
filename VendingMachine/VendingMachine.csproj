@@ -47,11 +47,11 @@
   <ItemGroup>
     <Compile Include="DTO\Currencies.cs" />
     <Compile Include="DTO\Denomination.cs" />
-    <Compile Include="DTO\DenominationComparer.cs" />
+    <Compile Include="Helpers\DenominationComparer.cs" />
     <Compile Include="DTO\Enums\DenominationNames.cs" />
     <Compile Include="DTO\Product.cs" />
-    <Compile Include="DTO\VendingCash.cs" />
-    <Compile Include="DTO\VendingMachineState.cs" />
+    <Compile Include="VendingCash.cs" />
+    <Compile Include="VendingMachineState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

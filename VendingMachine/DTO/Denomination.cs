@@ -1,12 +1,12 @@
 ﻿
 using VendingMachine.DTO.Enums;
 
-namespace VendingMachine
+namespace VendingMachine.DTO
 {
 	public abstract class Denomination
 	{
-		public virtual DenominationNames name { get; }
-		public virtual decimal value { get; }
+		public virtual DenominationNames Name { get; }
+		public virtual decimal Value { get; }
 
 	}
 }

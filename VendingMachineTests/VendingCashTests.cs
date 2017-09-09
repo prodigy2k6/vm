@@ -49,14 +49,14 @@ namespace VendingMachineTest
 
             vendingCash.InternalCash.Count.Should().Be(8);
 
-            vendingCash.InternalCash.Keys.ElementAt(0).name.Should().Be(DenominationNames.TwoPound);
-            vendingCash.InternalCash.Keys.ElementAt(1).name.Should().Be(DenominationNames.Pound);
-            vendingCash.InternalCash.Keys.ElementAt(2).name.Should().Be(DenominationNames.FiftyPence);
-            vendingCash.InternalCash.Keys.ElementAt(3).name.Should().Be(DenominationNames.TwentyPence);
-            vendingCash.InternalCash.Keys.ElementAt(4).name.Should().Be(DenominationNames.TenPence);
-            vendingCash.InternalCash.Keys.ElementAt(5).name.Should().Be(DenominationNames.FivePence);
-            vendingCash.InternalCash.Keys.ElementAt(6).name.Should().Be(DenominationNames.TwoPence);
-            vendingCash.InternalCash.Keys.ElementAt(7).name.Should().Be(DenominationNames.Penny);
+            vendingCash.InternalCash.Keys.ElementAt(0).Name.Should().Be(DenominationNames.TwoPound);
+            vendingCash.InternalCash.Keys.ElementAt(1).Name.Should().Be(DenominationNames.Pound);
+            vendingCash.InternalCash.Keys.ElementAt(2).Name.Should().Be(DenominationNames.FiftyPence);
+            vendingCash.InternalCash.Keys.ElementAt(3).Name.Should().Be(DenominationNames.TwentyPence);
+            vendingCash.InternalCash.Keys.ElementAt(4).Name.Should().Be(DenominationNames.TenPence);
+            vendingCash.InternalCash.Keys.ElementAt(5).Name.Should().Be(DenominationNames.FivePence);
+            vendingCash.InternalCash.Keys.ElementAt(6).Name.Should().Be(DenominationNames.TwoPence);
+            vendingCash.InternalCash.Keys.ElementAt(7).Name.Should().Be(DenominationNames.Penny);
         }
 
         [Test]
