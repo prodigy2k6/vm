@@ -1,60 +1,61 @@
-﻿using System;
+﻿
+using VendingMachine.DTO.Enums;
 
-namespace VendingMachine
+namespace VendingMachine.DTO
 {
 	public class Pound : Denomination
 	{
-		public override string name { get { return "Pound"; } }
+		public override DenominationNames name => DenominationNames.Pound;
 
-		public override decimal value { get { return 1.00m; } }
+	    public override decimal value => 1.00m;
 	}
 
 	public class FiftyPence : Denomination
 	{
-		public override string name { get { return "50p"; } }
+        public override DenominationNames name => DenominationNames.FiftyPence;
 
-		public override decimal value { get { return 0.50m; } }
+        public override decimal value => 0.50m;
 	}
 
 	public class TwoPound : Denomination
 	{
-		public override string name { get { return "TwoPound"; } }
+		public override DenominationNames name => DenominationNames.TwoPound;
 
-		public override decimal value { get { return 2.00m; } }
+	    public override decimal value => 2.00m;
 	}
 
 	public class TwentyPence : Denomination
 	{
-		public override string name { get { return "TwentyPence"; } }
+		public override DenominationNames name => DenominationNames.TwentyPence;
 
-		public override decimal value { get { return 0.20m; } }
+	    public override decimal value => 0.20m;
 	}
 
 	public class TenPence : Denomination
 	{
-		public override string name { get { return "TenPence"; } }
+		public override DenominationNames name => DenominationNames.TenPence;
 
-		public override decimal value { get { return 0.10m; } }
+	    public override decimal value => 0.10m;
 	}
 
 	public class FivePence : Denomination
 	{
-		public override string name { get { return "FivePence"; } }
+		public override DenominationNames name => DenominationNames.FivePence;
 
-		public override decimal value { get { return 0.05m; } }
+	    public override decimal value => 0.05m;
 	}
 
 	public class TwoPence : Denomination
 	{
-		public override string name { get { return "TwoPence"; } }
+		public override DenominationNames name => DenominationNames.TwoPence;
 
-		public override decimal value { get { return 0.02m; } }
+	    public override decimal value => 0.02m;
 	}
 
 	public class Penny : Denomination
 	{
-		public override string name { get { return "Penny"; } }
+		public override DenominationNames name => DenominationNames.Penny;
 
-		public override decimal value { get { return 0.01m; } }
+	    public override decimal value => 0.01m;
 	}
 }

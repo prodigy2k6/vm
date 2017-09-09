@@ -1,10 +1,11 @@
 ﻿using System;
+using VendingMachine.DTO.Enums;
 
 namespace VendingMachine
 {
 	public abstract class Denomination
 	{
-		public virtual string name { get; }
+		public virtual DenominationNames name { get; }
 		public virtual decimal value { get; }
 
 	}
