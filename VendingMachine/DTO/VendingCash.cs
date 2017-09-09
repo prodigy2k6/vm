@@ -82,15 +82,6 @@ namespace VendingMachine
                     _logger.Debug($"'{coin.Key.name}' coins remaining = {currentCoinCount}");
                     _logger.Debug($"Remaining change to acquire = {changeRequired}");
 
-                    //if (changeRequired < coin.Key.value)
-                    //{
-                    //    calcChange = false;
-                    //}
-
-                    //for (var i = 0; i < allocatedCoins; i++)
-                    //{
-                    //    changeToReturn.Add(coin.Key);
-                    //}
                 }
 
                 for (var i = 0; i < allocatedCoins; i++)
@@ -101,12 +92,13 @@ namespace VendingMachine
                 if (changeRequired == 0)
                 {
                     removeCoins(changeToReturn);
+
+                    _logger.Debug("Change allocated successfully");
+
                     return true;
                 }
 
             }
-
-
 
             _logger.Debug("Unable to allocate coins");
             return false;
