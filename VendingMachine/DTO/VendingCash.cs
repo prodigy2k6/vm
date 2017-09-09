@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using VendingMachine.DTO;
 using NLog;
 
@@ -9,27 +8,27 @@ namespace VendingMachine
 {
     public class VendingCash
     {
-        internal SortedDictionary<Denomination, int> internalCash { get; set; }
+        internal SortedDictionary<Denomination, int> InternalCash { get; set; }
 
-        private Logger _logger = LogManager.GetCurrentClassLogger();
+        private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public VendingCash()
         {
-            internalCash = new SortedDictionary<Denomination, int>(new DenominationComparer());
+            InternalCash = new SortedDictionary<Denomination, int>(new DenominationComparer());
         }
 
-        public void processNewCoins(IEnumerable<Denomination> coins)
+        public void AddCoins(IEnumerable<Denomination> coins)
         {
             foreach (var coin in coins)
             {
-                if (internalCash.ContainsKey(coin))
+                if (InternalCash.ContainsKey(coin))
                 {
-                    internalCash[coin]++;
+                    InternalCash[coin]++;
                     _logger.Debug($"Adding {coin.name} coin to existing denomination");
                 }
                 else
                 {
-                    internalCash.Add(coin, 1);
+                    InternalCash.Add(coin, 1);
                     _logger.Debug($"Adding new {coin.name} coin to cash");
                 }
             }
@@ -38,27 +37,27 @@ namespace VendingMachine
 
         public decimal CurrentTotal()
         {
-            return internalCash.Select(x => x.Key.value * x.Value).Sum();
+            return InternalCash.Select(x => x.Key.value * x.Value).Sum();
         }
 
-        public void removeCoins(IEnumerable<Denomination> coins)
+        public void RemoveCoins(IEnumerable<Denomination> coins)
         {
             foreach (var coin in coins)
             {
-                if (internalCash.ContainsKey(coin))
+                if (InternalCash.ContainsKey(coin))
                 {
-                    if (internalCash[coin] < 1)
+                    if (InternalCash[coin] < 1)
                         throw new Exception($"Not enough {coin.name} to deduct from machine");
 
-                    internalCash[coin]--;
-                    _logger.Debug($"{coin.name} deducted. {internalCash[coin]} coins remain.");
+                    InternalCash[coin]--;
+                    _logger.Debug($"{coin.name} deducted. {InternalCash[coin]} coins remain.");
                 }
                 else
                     throw new Exception($"No {coin.name} available in machine");
             }
         }
 
-        public bool canGetChange(decimal changeRequired)
+        public bool CanReturnChange(decimal changeRequired)
         {
             var changeToReturn = new List<Denomination>();
 
@@ -66,7 +65,7 @@ namespace VendingMachine
 
             _logger.Debug("Starting allocation");
 
-            foreach (var coin in internalCash.Where(x => x.Value > 0))
+            foreach (var coin in InternalCash.Where(x => x.Value > 0))
             {
                 _logger.Debug($"'{coin.Key.name}' {coin.Value} Coins available");
                 var currentCoinCount = coin.Value;
@@ -91,7 +90,7 @@ namespace VendingMachine
 
                 if (changeRequired == 0)
                 {
-                    removeCoins(changeToReturn);
+                    RemoveCoins(changeToReturn);
 
                     _logger.Debug("Change allocated successfully");
 

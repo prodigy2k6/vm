@@ -17,7 +17,7 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.processNewCoins(new List<Denomination> { new Pound(), new TwoPence(), new Pound(), new Penny(), new FiftyPence() });
+            vendingCash.AddCoins(new List<Denomination> { new Pound(), new TwoPence(), new Pound(), new Penny(), new FiftyPence() });
 
             var total = vendingCash.CurrentTotal();
 
@@ -29,7 +29,7 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.processNewCoins(new List<Denomination>
+            vendingCash.AddCoins(new List<Denomination>
             {
                 new FivePence(),
                 new FiftyPence(),
@@ -44,16 +44,16 @@ namespace VendingMachineTest
                 new Pound(),
             });
 
-            vendingCash.internalCash.Count.Should().Be(8);
+            vendingCash.InternalCash.Count.Should().Be(8);
 
-            vendingCash.internalCash.Keys.ElementAt(0).name.Should().Be(DenominationNames.TwoPound);
-            vendingCash.internalCash.Keys.ElementAt(1).name.Should().Be(DenominationNames.Pound);
-            vendingCash.internalCash.Keys.ElementAt(2).name.Should().Be(DenominationNames.FiftyPence);
-            vendingCash.internalCash.Keys.ElementAt(3).name.Should().Be(DenominationNames.TwentyPence);
-            vendingCash.internalCash.Keys.ElementAt(4).name.Should().Be(DenominationNames.TenPence);
-            vendingCash.internalCash.Keys.ElementAt(5).name.Should().Be(DenominationNames.FivePence);
-            vendingCash.internalCash.Keys.ElementAt(6).name.Should().Be(DenominationNames.TwoPence);
-            vendingCash.internalCash.Keys.ElementAt(7).name.Should().Be(DenominationNames.Penny);
+            vendingCash.InternalCash.Keys.ElementAt(0).name.Should().Be(DenominationNames.TwoPound);
+            vendingCash.InternalCash.Keys.ElementAt(1).name.Should().Be(DenominationNames.Pound);
+            vendingCash.InternalCash.Keys.ElementAt(2).name.Should().Be(DenominationNames.FiftyPence);
+            vendingCash.InternalCash.Keys.ElementAt(3).name.Should().Be(DenominationNames.TwentyPence);
+            vendingCash.InternalCash.Keys.ElementAt(4).name.Should().Be(DenominationNames.TenPence);
+            vendingCash.InternalCash.Keys.ElementAt(5).name.Should().Be(DenominationNames.FivePence);
+            vendingCash.InternalCash.Keys.ElementAt(6).name.Should().Be(DenominationNames.TwoPence);
+            vendingCash.InternalCash.Keys.ElementAt(7).name.Should().Be(DenominationNames.Penny);
         }
 
         [Test]
@@ -61,7 +61,7 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.processNewCoins(new List<Denomination>
+            vendingCash.AddCoins(new List<Denomination>
             {
                 new FivePence(),
                 new FiftyPence(),
@@ -78,16 +78,16 @@ namespace VendingMachineTest
                 new FivePence()
             });
 
-            vendingCash.internalCash.Count.Should().Be(8);
+            vendingCash.InternalCash.Count.Should().Be(8);
 
-            vendingCash.internalCash.Values.ElementAt(0).Should().Be(1);
-            vendingCash.internalCash.Values.ElementAt(1).Should().Be(3);
-            vendingCash.internalCash.Values.ElementAt(2).Should().Be(2);
-            vendingCash.internalCash.Values.ElementAt(3).Should().Be(1);
-            vendingCash.internalCash.Values.ElementAt(4).Should().Be(1);
-            vendingCash.internalCash.Values.ElementAt(5).Should().Be(2);
-            vendingCash.internalCash.Values.ElementAt(6).Should().Be(1);
-            vendingCash.internalCash.Values.ElementAt(7).Should().Be(2);
+            vendingCash.InternalCash.Values.ElementAt(0).Should().Be(1);
+            vendingCash.InternalCash.Values.ElementAt(1).Should().Be(3);
+            vendingCash.InternalCash.Values.ElementAt(2).Should().Be(2);
+            vendingCash.InternalCash.Values.ElementAt(3).Should().Be(1);
+            vendingCash.InternalCash.Values.ElementAt(4).Should().Be(1);
+            vendingCash.InternalCash.Values.ElementAt(5).Should().Be(2);
+            vendingCash.InternalCash.Values.ElementAt(6).Should().Be(1);
+            vendingCash.InternalCash.Values.ElementAt(7).Should().Be(2);
         }
 
         [TestCase(1)]
@@ -102,7 +102,7 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.processNewCoins(new List<Denomination>
+            vendingCash.AddCoins(new List<Denomination>
             {
                 new FivePence(),
                 new FiftyPence(),
@@ -119,7 +119,7 @@ namespace VendingMachineTest
                 new FivePence()
             });
 
-            vendingCash.canGetChange(payment).Should().BeTrue();
+            vendingCash.CanReturnChange(payment).Should().BeTrue();
 
         }
 
@@ -129,7 +129,7 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.processNewCoins(new List<Denomination>
+            vendingCash.AddCoins(new List<Denomination>
             {
                 new FivePence(),
                 new FiftyPence(),
@@ -144,7 +144,7 @@ namespace VendingMachineTest
                 new FivePence()
             });
 
-            vendingCash.canGetChange(payment).Should().BeFalse();
+            vendingCash.CanReturnChange(payment).Should().BeFalse();
 
         }
     }
