@@ -17,7 +17,10 @@ namespace VendingMachineTest
         {
             var vendingCash = new VendingCash();
 
-            vendingCash.AddCoins(new List<Denomination> { new Pound(), new TwoPence(), new Pound(), new Penny(), new FiftyPence() });
+            vendingCash.AddCoins(new List<Denomination>
+            {
+                Currency.Pound, Currency.TwoPence, Currency.Pound, Currency.Penny, Currency.FiftyPence
+            });
 
             var total = vendingCash.CurrentTotal();
 
@@ -31,17 +34,17 @@ namespace VendingMachineTest
 
             vendingCash.AddCoins(new List<Denomination>
             {
-                new FivePence(),
-                new FiftyPence(),
-                new Pound(),
-                new TenPence(),
-                new TwentyPence(),
-                new TwoPence(),
-                new Pound(),
-                new Penny(),
-                new TwoPound(),
-                new FiftyPence(),
-                new Pound(),
+                Currency.FivePence,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.TenPence,
+                Currency.TwentyPence,
+                Currency.TwoPence,
+                Currency.Pound,
+                Currency.Penny,
+                Currency.TwoPound,
+                Currency.FiftyPence,
+                Currency.Pound,
             });
 
             vendingCash.InternalCash.Count.Should().Be(8);
@@ -63,19 +66,19 @@ namespace VendingMachineTest
 
             vendingCash.AddCoins(new List<Denomination>
             {
-                new FivePence(),
-                new FiftyPence(),
-                new Pound(),
-                new TenPence(),
-                new TwentyPence(),
-                new Penny(),
-                new TwoPence(),
-                new Pound(),
-                new Penny(),
-                new TwoPound(),
-                new FiftyPence(),
-                new Pound(),
-                new FivePence()
+                Currency.FivePence,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.TenPence,
+                Currency.TwentyPence,
+                Currency.Penny,
+                Currency.TwoPence,
+                Currency.Pound,
+                Currency.Penny,
+                Currency.TwoPound,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.FivePence,
             });
 
             vendingCash.InternalCash.Count.Should().Be(8);
@@ -104,19 +107,19 @@ namespace VendingMachineTest
 
             vendingCash.AddCoins(new List<Denomination>
             {
-                new FivePence(),
-                new FiftyPence(),
-                new Pound(),
-                new TenPence(),
-                new TwentyPence(),
-                new Penny(),
-                new TwoPence(),
-                new Pound(),
-                new Penny(),
-                new TwoPound(),
-                new FiftyPence(),
-                new Pound(),
-                new FivePence()
+                Currency.FivePence,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.TenPence,
+                Currency.TwentyPence,
+                Currency.Penny,
+                Currency.TwoPence,
+                Currency.Pound,
+                Currency.Penny,
+                Currency.TwoPound,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.FivePence,
             });
 
             vendingCash.CanReturnChange(payment).Should().BeTrue();
@@ -131,17 +134,17 @@ namespace VendingMachineTest
 
             vendingCash.AddCoins(new List<Denomination>
             {
-                new FivePence(),
-                new FiftyPence(),
-                new Pound(),
-                new TenPence(),
-                new TwentyPence(),
-                new TwoPence(),
-                new Pound(),
-                new TwoPound(),
-                new FiftyPence(),
-                new Pound(),
-                new FivePence()
+                Currency.FivePence,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.TenPence,
+                Currency.TwentyPence,
+                Currency.TwoPence,
+                Currency.Pound,
+                Currency.TwoPound,
+                Currency.FiftyPence,
+                Currency.Pound,
+                Currency.FivePence
             });
 
             vendingCash.CanReturnChange(payment).Should().BeFalse();

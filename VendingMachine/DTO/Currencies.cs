@@ -58,4 +58,23 @@ namespace VendingMachine.DTO
 
 	    public override decimal value => 0.01m;
 	}
+
+    public class Currency
+    {
+        public static Denomination TwoPound => new TwoPound();
+
+        public static Denomination Pound => new Pound();
+
+        public static Denomination FiftyPence => new FiftyPence();
+
+        public static Denomination TwentyPence => new TwentyPence();
+
+        public static Denomination TenPence => new TenPence();
+
+        public static Denomination FivePence => new FivePence();
+
+        public static Denomination TwoPence => new TwoPence();
+
+        public static Denomination Penny => new Penny();
+    }
 }

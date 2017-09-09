@@ -34,7 +34,6 @@ namespace VendingMachine
             }
         }
 
-
         public decimal CurrentTotal()
         {
             return InternalCash.Select(x => x.Key.value * x.Value).Sum();
@@ -61,9 +60,7 @@ namespace VendingMachine
         {
             var changeToReturn = new List<Denomination>();
 
-            var calcChange = true;
-
-            _logger.Debug("Starting allocation");
+            _logger.Debug("Starting allocation of coins");
 
             foreach (var coin in InternalCash.Where(x => x.Value > 0))
             {
@@ -100,9 +97,8 @@ namespace VendingMachine
             }
 
             _logger.Debug("Unable to allocate coins");
-            return false;
 
-            
+            return false;
         }
 
 
