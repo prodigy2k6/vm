@@ -11,6 +11,6 @@ namespace VendingMachine
         string ShowAvailableCash();
         bool DenominationsAdded();
         bool OutOfCoins();
-        bool CanReturnChange(decimal changeRequired);
+        ReturnChangeResult CanReturnChange(decimal changeRequired,IEnumerable<Denomination> newCoins = null);
     }
 }

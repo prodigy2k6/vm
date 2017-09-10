@@ -8,7 +8,6 @@ namespace VendingMachine.DTO
 	{
 		public string Name { get; set; }
 		public decimal Price { get; set; }
-        public int Code { get; set; }
 
 		public Product()
 		{
@@ -16,16 +15,15 @@ namespace VendingMachine.DTO
 			Price = 0.0m;
 		}
     
-	    public Product(int code, string name, decimal price)
+	    public Product(string name, decimal price)
 	    {
-	        Code = code;
 	        Name = name;
 	        Price = price;
 	    }
 
         public override string ToString()
 	    {
-	        return $"Name: {Name}\t Price: {Price}\t SelectionCode: {Code}";
+	        return $"Name: {Name}\t Price: {Price}";
 	    }
 
 	    public override bool Equals(object obj)

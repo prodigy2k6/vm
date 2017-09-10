@@ -35,6 +35,47 @@ namespace VendingMachine
             }
         }
 
+        public SortedDictionary<Denomination,int> AddCoinsToDictionary(SortedDictionary<Denomination,int> dictionary, IEnumerable<Denomination> coins)
+        {
+            if (coins != null)
+            {
+                foreach (var coin in coins)
+                {
+                    if (dictionary.ContainsKey(coin))
+                    {
+                        dictionary[coin]++;
+                        _logger.Debug($"Adding {coin.Name} coin to existing denomination");
+                    }
+                    else
+                    {
+                        dictionary.Add(coin, 1);
+                        _logger.Debug($"Adding new {coin.Name} coin to cash");
+                    }
+                }
+            }
+            return dictionary;
+        }
+
+        public SortedDictionary<Denomination,int> CreateCoinDictionary(IEnumerable<Denomination> coins)
+        {
+            var coinDictionary = new SortedDictionary<Denomination, int>(new DenominationComparer());
+
+            foreach (var coin in coins)
+            {
+                if (coinDictionary.ContainsKey(coin))
+                {
+                    coinDictionary[coin]++;
+                    _logger.Debug($"Adding {coin.Name} coin to existing denomination");
+                }
+                else
+                {
+                    coinDictionary.Add(coin, 1);
+                    _logger.Debug($"Adding new {coin.Name} coin to cash");
+                }
+            }
+            return coinDictionary;
+        }
+
         public decimal CurrentTotal()
         {
             return InternalCash.Select(x => x.Key.Value * x.Value).Sum();
@@ -82,13 +123,19 @@ namespace VendingMachine
             return InternalCash.All(x => x.Value == 0);
         }
 
-        public bool CanReturnChange(decimal changeRequired)
+        public ReturnChangeResult CanReturnChange(decimal changeRequired, IEnumerable<Denomination> coinsAddedByUser = null)
         {
+            var result = new ReturnChangeResult(false, null);
+
             var changeToReturn = new List<Denomination>();
 
             _logger.Debug("Starting allocation of coins");
 
-            foreach (var coin in InternalCash.Where(x => x.Value > 0))
+            var copyDictionary = CopyDictionary(InternalCash);
+
+            AddCoinsToDictionary(copyDictionary, coinsAddedByUser);
+
+            foreach (var coin in copyDictionary.Where(x => x.Value > 0))
             {
                 _logger.Debug($"'{coin.Key.Name}' {coin.Value} Coins available");
                 var currentCoinCount = coin.Value;
@@ -113,18 +160,37 @@ namespace VendingMachine
 
                 if (changeRequired == 0)
                 {
+                    if (coinsAddedByUser != null)
+                    {
+                        AddCoins(coinsAddedByUser);
+                    }
+
                     RemoveCoins(changeToReturn);
 
                     _logger.Debug("Change allocated successfully");
 
-                    return true;
+                    result = new ReturnChangeResult(true, changeToReturn);
+
+                    return result ;
                 }
 
             }
 
             _logger.Debug("Unable to allocate coins");
 
-            return false;
+            return result;
+        }
+
+        public SortedDictionary<Denomination, int> CopyDictionary(SortedDictionary<Denomination, int> dictionary)
+        {
+            var newDictionary = new SortedDictionary<Denomination, int>(new DenominationComparer());
+
+            foreach (var coin in dictionary)
+            {
+                newDictionary.Add(coin.Key,coin.Value);
+            }
+
+            return newDictionary;
         }
     }
 }

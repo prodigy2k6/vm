@@ -122,7 +122,7 @@ namespace VendingMachineTest
                 Currency.FivePence,
             });
 
-            vendingCash.CanReturnChange(payment).Should().BeTrue();
+            vendingCash.CanReturnChange(payment).Success.Should().BeTrue();
 
         }
 
@@ -147,7 +147,20 @@ namespace VendingMachineTest
                 Currency.FivePence
             });
 
-            vendingCash.CanReturnChange(payment).Should().BeFalse();
+            vendingCash.CanReturnChange(payment).Success.Should().BeFalse();
+
+        }
+
+        [TestCase(1.01)]
+        public void VendingCash_GetChange_ExactChange_Success(decimal payment)
+        {
+            var vendingCash = new VendingCash();
+
+            vendingCash.CanReturnChange(payment, new List < Denomination >
+            {
+                Currency.Pound,
+                Currency.Penny
+            }).Success.Should().BeTrue();
 
         }
     }

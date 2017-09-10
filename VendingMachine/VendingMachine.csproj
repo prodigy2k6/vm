@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="DTO\Currencies.cs" />
     <Compile Include="DTO\Denomination.cs" />
+    <Compile Include="DTO\ReturnChangeResult.cs" />
     <Compile Include="Helpers\DenominationComparer.cs" />
     <Compile Include="DTO\Enums\DenominationNames.cs" />
     <Compile Include="DTO\Product.cs" />
