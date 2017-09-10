@@ -14,7 +14,7 @@ namespace VendingMachine
 		Dictionary<Product, int> products { get; }
 		IVendingCash cash { get;  }
 
-	    private Logger _logger = LogManager.GetCurrentClassLogger();
+	    private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
 		public VendingMachineState()
 		{
@@ -110,6 +110,71 @@ namespace VendingMachine
 	        }
             
 	        return coinsToAdd;
+	    }
+
+	    public void AddProduct()
+	    {
+	        Console.WriteLine("Enter Product Name: ");
+	        var productName = Console.ReadLine();
+
+            Console.WriteLine("Enter Price");
+	        var price = Console.ReadLine();
+
+	        Console.WriteLine("Enter Amount");
+	        var amount = Console.ReadLine();
+
+	        try
+	        {
+                CheckProduct(productName, price, amount);
+                Console.WriteLine("Product successfully added");
+	        }
+	        catch (Exception e)
+	        {
+                Console.WriteLine($"Failed to add product. Error '{e.Message}'");
+	        }
+
+	        Console.WriteLine(GetAvailableProducts());
+
+	        Console.ReadLine();
+	    }
+
+	    internal bool CheckProduct(string productName, string price, string amount)
+	    {
+	        if (products.ContainsKey(new Product { Name = productName }))
+	        {
+	            const string message = "Product already exists";
+	            _logger.Error(message);
+	            throw new InvalidInputException(message);
+	        }
+
+	        var convertedDec = decimal.TryParse(price, out var priceDecimal);
+
+	        if (!convertedDec)
+	        {
+	            var message = $"Invalid input price '{price}'";
+	            _logger.Error(message);
+	            throw new InvalidInputException(message);
+            }
+
+	        var convertedInt = int.TryParse(amount, out var intAmount);
+
+	        if (!convertedInt)
+	        {
+	            var message = $"Invalid input amount '{amount}'";
+	            _logger.Error(message);
+	            throw new InvalidInputException(message);
+	        }
+
+            var inputPrice = Math.Round(priceDecimal, 2, MidpointRounding.AwayFromZero);
+
+            products.Add(new Product(products.Count,productName,inputPrice),intAmount);
+            _logger.Debug("Product added");
+	        return true;
+	    }
+
+	    public void BuyItem()
+	    {
+	        
 	    }
     }
 }
