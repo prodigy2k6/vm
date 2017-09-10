@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.Linq;
 
 namespace VendingMachine.DTO
 {
@@ -12,6 +13,11 @@ namespace VendingMachine.DTO
         {
             Success = success;
             ChangeToReturn = change;
+        }
+
+        public override string ToString()
+        {
+            return string.Join(",",ChangeToReturn.Select(x=>x.Name));
         }
     }
 }

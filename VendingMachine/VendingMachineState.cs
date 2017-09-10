@@ -255,7 +255,7 @@ namespace VendingMachine
                 {
                     Products[productSelected] -= 1;
                     Console.WriteLine($"{productName} bought successfully");
-                    Console.WriteLine($"Change returned: {string.Join(",", changeToReturn)} ");
+                    Console.WriteLine($"Change returned: {changeToReturn} ");
                 }
             }
 
