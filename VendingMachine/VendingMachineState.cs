@@ -12,27 +12,28 @@ namespace VendingMachine
 {
     public class VendingMachineState
     {
-        Dictionary<Product, int> products { get; }
-        IVendingCash cash { get; }
+        internal Dictionary<Product, int> Products { get; set; }
+        internal IVendingCash Cash { get; set; }
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
         public VendingMachineState()
         {
-            products = new Dictionary<Product, int>();
-            cash = new VendingCash();
+            Products = new Dictionary<Product, int>();
+            Cash = new VendingCash();
         }
 
         public string GetAvailableProducts()
         {
             var stringBuilder = new StringBuilder();
 
-            if (products.Count == 0)
+            if (Products.Count == 0)
                 return "No products in VendingMachine";
 
+            stringBuilder.AppendLine();
             stringBuilder.AppendLine("******************PRODUCT******************");
 
-            foreach (var product in products)
+            foreach (var product in Products)
             {
                 stringBuilder.AppendLine($"{product.Key} Count: {product.Value}");
             }
@@ -42,12 +43,12 @@ namespace VendingMachine
 
         public string GetAvailableCash()
         {
-            return cash.ShowAvailableCash();
+            return Cash.ShowAvailableCash();
         }
 
-        public void addCoins()
+        public void AddCoins()
         {
-            var format = "'Name' 'Amount'";
+            const string format = "'Name' 'Amount'";
             Console.WriteLine("Available Denominations: ");
             foreach (var denomName in Enum.GetNames(typeof(DenominationNames)))
             {
@@ -61,7 +62,7 @@ namespace VendingMachine
             {
                 var input = Console.ReadLine();
                 var coins = ProcessInputCoins(input);
-                cash.AddCoins(coins);
+                Cash.AddCoins(coins);
             }
             catch (InvalidInputException exception)
             {
@@ -72,7 +73,7 @@ namespace VendingMachine
             _logger.Debug(message);
             Console.WriteLine(message);
             Console.WriteLine("");
-            cash.ShowAvailableCash();
+            Cash.ShowAvailableCash();
             Console.ReadLine();
         }
 
@@ -167,7 +168,7 @@ namespace VendingMachine
 
         internal bool CheckProduct(string productName, string price, string amount)
         {
-            if (products.ContainsKey(new Product { Name = productName }))
+            if (Products.ContainsKey(new Product { Name = productName }))
             {
                 const string message = "Product already exists";
                 _logger.Error(message);
@@ -194,7 +195,7 @@ namespace VendingMachine
 
             var inputPrice = Math.Round(priceDecimal, 2, MidpointRounding.AwayFromZero);
 
-            products.Add(new Product(productName, inputPrice), intAmount);
+            Products.Add(new Product(productName, inputPrice), intAmount);
             _logger.Debug("Product added");
             return true;
         }
@@ -236,14 +237,14 @@ namespace VendingMachine
             if (priceDifference == 0)
             {
                 Console.WriteLine("Exact payment given. No Change to return");
-                cash.AddCoins(payment);
-                products[productSelected] -= 1;
+                Cash.AddCoins(payment);
+                Products[productSelected] -= 1;
                 Console.WriteLine($"{productName} bought successfully");
                 
             }
             else
             {
-                var changeToReturn = cash.CanReturnChange(priceDifference, payment);
+                var changeToReturn = Cash.CanReturnChange(priceDifference, payment);
 
                 if (!changeToReturn.Success)
                 {
@@ -252,7 +253,7 @@ namespace VendingMachine
                 }
                 else
                 {
-                    products[productSelected] -= 1;
+                    Products[productSelected] -= 1;
                     Console.WriteLine($"{productName} bought successfully");
                     Console.WriteLine($"Change returned: {string.Join(",", changeToReturn)} ");
                 }
@@ -264,11 +265,11 @@ namespace VendingMachine
         }
 
         
-        private Product ProductExists(string productName)
+        internal Product ProductExists(string productName)
         {
             try
             {
-                var product = products.Keys.Single(x => x.Name.Equals(productName,StringComparison.InvariantCultureIgnoreCase));
+                var product = Products.Keys.Single(x => x.Name.Equals(productName,StringComparison.InvariantCultureIgnoreCase));
                 return product;
             }
             catch (InvalidOperationException)
@@ -280,19 +281,19 @@ namespace VendingMachine
 
         private bool ProductAvailable(string productName)
         {
-            return products[new Product {Name = productName}] > 0;
+            return Products[new Product {Name = productName}] > 0;
         }
 
         public void ClearExistingProducts()
         {
-            products.Clear();
+            Products.Clear();
             Console.WriteLine("All products cleared");
         }
 
         public void ClearExistingCash()
         {
-            cash.ClearCash();
-            Console.WriteLine("All products cleared");
+            Cash.ClearCash();
+            Console.WriteLine("All Cash cleared");
         }
     }
 }

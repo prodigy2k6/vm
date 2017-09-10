@@ -85,6 +85,7 @@ namespace VendingMachine
             if (InternalCash.Count == 0)
                 return "No coins have been added to the Vending Machine";
 
+            stringBuilder.AppendLine();
             stringBuilder.AppendLine("******************CASH******************");
 
             foreach (var coin in InternalCash)

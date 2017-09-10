@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 using VendingMachine;
+using VendingMachine.DTO;
 using VendingMachine.Exceptions;
 
 namespace VendingMachineTest
@@ -33,6 +30,22 @@ namespace VendingMachineTest
             var vendingMachineState = new VendingMachineState();
 
             Assert.Throws<InvalidInputException>(() => vendingMachineState.ProcessInputCoins(input));
+        }
+
+        [Test]
+        public void VendingMachineState_ProductExist()
+        {
+            var vendingMachineState = new VendingMachineState
+            {
+                Products = new Dictionary<Product, int>
+                {
+                    {new Product("Mars", 0.85m), 10},
+                    {new Product("Snickers", 0.85m), 10}
+                }
+            };
+            vendingMachineState.ProductExists("Mars").Should().NotBeNull();
+            vendingMachineState.ProductExists("Snickers").Price.Should().Be(0.85m);
+            vendingMachineState.ProductExists("Snickes").Should().BeNull();
         }
     }
 }
