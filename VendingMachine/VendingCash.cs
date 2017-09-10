@@ -85,6 +85,8 @@ namespace VendingMachine
             if (InternalCash.Count == 0)
                 return "No coins have been added to the Vending Machine";
 
+            stringBuilder.AppendLine("******************CASH******************");
+
             foreach (var coin in InternalCash)
             {
                 stringBuilder.AppendLine($"{coin.Key} Count: {coin.Value}");
@@ -172,6 +174,11 @@ namespace VendingMachine
             }
 
             return newDictionary;
+        }
+
+        public void ClearCash()
+        {
+            InternalCash.Clear();
         }
     }
 }

@@ -30,6 +30,8 @@ namespace VendingMachine
             if (products.Count == 0)
                 return "No products in VendingMachine";
 
+            stringBuilder.AppendLine("******************PRODUCT******************");
+
             foreach (var product in products)
             {
                 stringBuilder.AppendLine($"{product.Key} Count: {product.Value}");
@@ -279,6 +281,18 @@ namespace VendingMachine
         private bool ProductAvailable(string productName)
         {
             return products[new Product {Name = productName}] > 0;
+        }
+
+        public void ClearExistingProducts()
+        {
+            products.Clear();
+            Console.WriteLine("All products cleared");
+        }
+
+        public void ClearExistingCash()
+        {
+            cash.ClearCash();
+            Console.WriteLine("All products cleared");
         }
     }
 }

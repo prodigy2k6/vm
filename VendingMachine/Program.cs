@@ -7,18 +7,20 @@ namespace VendingMachine
 {
     public class Program
     {
-        
+        public static VendingMachineState vendingMachine = new VendingMachineState();
+
         static void Main(string[] args)
         {
-            var runProgram = true;
+            var endProgram = false;
 
-            while (runProgram)
+
+            while (!endProgram)
             {
-                DisplayMenu();
-
+                Console.WriteLine(DisplayMenu());
+                endProgram = SelectOption();
 
             }
-         
+
 
         }
 
@@ -33,6 +35,7 @@ namespace VendingMachine
             stringBuilder.AppendLine("3. Show available change");
             stringBuilder.AppendLine("4. Add change");
             stringBuilder.AppendLine("5. Buy Product");
+            stringBuilder.AppendLine("6. EXIT");
             stringBuilder.AppendLine();
 
             return stringBuilder.ToString();
@@ -40,35 +43,46 @@ namespace VendingMachine
 
         public static bool SelectOption()
         {
+            Console.WriteLine("Choose Option: ");
             var option = Console.ReadLine();
 
             switch (option)
             {
                 case "1":
-                {
-                    return false;
-                }
+                    {
+                        Console.WriteLine(vendingMachine.GetAvailableProducts());
+                        return false;
+                    }
                 case "2":
-                {
-                    return false;
-                }
+                    {
+                        vendingMachine.AddProduct();
+                        return false;
+                    }
                 case "3":
-                {
-                    return false;
-                }
+                    {
+                        Console.WriteLine(vendingMachine.GetAvailableCash());
+                        return false;
+                    }
                 case "4":
-                {
-                    return false;
-                }
+                    {
+                        vendingMachine.addCoins();
+                        return false;
+                    }
                 case "5":
-                {
-                    return false;
-                }
+                    {
+                        vendingMachine.BuyItem();
+                        return false;
+                    }
+                case "6":
+                    {
+                        return true;
+                    }
+
                 default:
-                {
-                    Console.WriteLine("Please choose a valid option from the menu.");
-                    return false;
-                }
+                    {
+                        Console.WriteLine("Please choose a valid option from the menu.");
+                        return false;
+                    }
 
             }
         }

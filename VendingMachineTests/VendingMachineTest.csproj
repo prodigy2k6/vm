@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VendingCashTests.cs" />
+    <Compile Include="VendingMachineStateTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

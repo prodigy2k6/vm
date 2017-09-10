@@ -12,5 +12,6 @@ namespace VendingMachine
         bool DenominationsAdded();
         bool OutOfCoins();
         ReturnChangeResult CanReturnChange(decimal changeRequired,IEnumerable<Denomination> newCoins = null);
+        void ClearCash();
     }
 }
