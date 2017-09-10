@@ -68,12 +68,12 @@ namespace VendingMachine
             catch (InvalidInputException exception)
             {
                 Console.WriteLine($"Failed to add coins. Error : {exception.Message}");
+                return;
             }
 
             var message = "Successfully added coins";
             _logger.Debug(message);
             Console.WriteLine(message);
-            Cash.ShowAvailableCash();
         }
 
         internal List<Denomination> ProcessInputCoins(string input)
@@ -129,7 +129,7 @@ namespace VendingMachine
 
                     coinsToAdd.Add(coinName.GetCurrency());
                 }
-                catch (InvalidInputException e)
+                catch (ArgumentException e)
                 {
                     _logger.Error($"Invalid Coin {coin}", e);
                     throw new InvalidInputException($"Invalid Coin {coin}", e);
@@ -218,9 +218,18 @@ namespace VendingMachine
 
             Console.WriteLine("Enter Coins by name separated by ',' (Pound,Pound,FivePence) :");
             var coinNames = Console.ReadLine();
+            List<Denomination> payment;
 
-            var payment = ProcessPaymentCoins(coinNames);
-
+            try
+            {
+                payment = ProcessPaymentCoins(coinNames);
+            }
+            catch (InvalidInputException e)
+            {
+                Console.WriteLine(e.Message);
+                return;
+            }
+            
             var totalPayment = payment.Sum(x => x.Value);
 
             var priceDifference = totalPayment - productSelected.Price;
