@@ -10,7 +10,7 @@ using VendingMachine.Helpers;
 
 namespace VendingMachine
 {
-    public class VendingMachineState
+    public class VendingMachineState : IVendingMachineState
     {
         internal Dictionary<Product, int> Products { get; set; }
         internal IVendingCash Cash { get; set; }
@@ -264,7 +264,6 @@ namespace VendingMachine
             Console.ReadLine();
         }
 
-        
         internal Product ProductExists(string productName)
         {
             try

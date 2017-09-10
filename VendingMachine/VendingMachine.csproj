@@ -57,6 +57,7 @@
     <Compile Include="Exceptions\InvalidInputException.cs" />
     <Compile Include="Helpers\EnumExtension.cs" />
     <Compile Include="IVendingCash.cs" />
+    <Compile Include="IVendingMachineState.cs" />
     <Compile Include="VendingCash.cs" />
     <Compile Include="VendingMachineState.cs" />
     <Compile Include="Program.cs" />
