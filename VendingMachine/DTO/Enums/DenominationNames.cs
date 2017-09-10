@@ -1,5 +1,4 @@
 ﻿
-
 namespace VendingMachine.DTO.Enums
 {
     public enum DenominationNames

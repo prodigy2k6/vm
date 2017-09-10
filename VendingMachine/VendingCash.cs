@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VendingMachine.DTO;
 using NLog;
+using VendingMachine.Helpers;
 using VendingMachine.Interfaces;
 
 namespace VendingMachine
@@ -166,7 +167,7 @@ namespace VendingMachine
             return result;
         }
 
-        public SortedDictionary<Denomination, int> CopyDictionary(SortedDictionary<Denomination, int> dictionary)
+        private SortedDictionary<Denomination, int> CopyDictionary(SortedDictionary<Denomination, int> dictionary)
         {
             var newDictionary = new SortedDictionary<Denomination, int>(new DenominationComparer());
 

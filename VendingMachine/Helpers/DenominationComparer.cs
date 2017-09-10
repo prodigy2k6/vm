@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using VendingMachine.DTO;
 
-namespace VendingMachine.DTO
+namespace VendingMachine.Helpers
 {
     public class DenominationComparer : IComparer<Denomination>
     {

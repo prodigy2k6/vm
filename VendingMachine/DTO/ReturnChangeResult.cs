@@ -17,7 +17,7 @@ namespace VendingMachine.DTO
 
         public override string ToString()
         {
-            return string.Join(",",ChangeToReturn.Select(x=>x.Name));
+            return string.Join(",",ChangeToReturn.Select(x => x.Name));
         }
     }
 }

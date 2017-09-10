@@ -73,9 +73,7 @@ namespace VendingMachine
             var message = "Successfully added coins";
             _logger.Debug(message);
             Console.WriteLine(message);
-            Console.WriteLine("");
             Cash.ShowAvailableCash();
-            Console.ReadLine();
         }
 
         internal List<Denomination> ProcessInputCoins(string input)
@@ -163,8 +161,6 @@ namespace VendingMachine
             }
 
             Console.WriteLine(GetAvailableProducts());
-
-            Console.ReadLine();
         }
 
         internal bool CheckProduct(string productName, string price, string amount)
@@ -262,7 +258,6 @@ namespace VendingMachine
 
             Console.WriteLine(GetAvailableProducts());
             Console.WriteLine(GetAvailableCash());
-            Console.ReadLine();
         }
 
         internal Product ProductExists(string productName)
