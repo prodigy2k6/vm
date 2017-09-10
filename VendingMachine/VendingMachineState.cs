@@ -56,7 +56,7 @@ namespace VendingMachine
 
             Console.WriteLine($"Add denominations in format {format}");
             Console.WriteLine("Multiple denominations can be added in one line separated by ','");
-            Console.WriteLine("Example: 'TwoPound 20, Penny 100, TenPence 30'");
+            Console.WriteLine("Example: 'TwoPound - 20, Penny - 100, TenPence - 30'");
             try
             {
                 var input = Console.ReadLine();
@@ -82,7 +82,7 @@ namespace VendingMachine
             var multipleCoins = input.Split(',');
             foreach (var coin in multipleCoins)
             {
-                var coinAmount = coin.Split(' ');
+                var coinAmount = coin.Split('-');
                 if (coinAmount.Length > 2)
                 {
                     _logger.Error($"Incorrect Coin input {coin}");
@@ -91,8 +91,8 @@ namespace VendingMachine
 
                 try
                 {
-                    var coinName = (DenominationNames)Enum.Parse(typeof(DenominationNames), coinAmount[0], true);
-                    var converted = int.TryParse(coinAmount[1], out var amount);
+                    var coinName = (DenominationNames)Enum.Parse(typeof(DenominationNames), coinAmount[0].Trim(), true);
+                    var converted = int.TryParse(coinAmount[1].Trim(), out var amount);
                     if (!converted)
                     {
 
