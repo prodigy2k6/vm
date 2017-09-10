@@ -53,6 +53,9 @@
     <Compile Include="Helpers\DenominationComparer.cs" />
     <Compile Include="DTO\Enums\DenominationNames.cs" />
     <Compile Include="DTO\Product.cs" />
+    <Compile Include="Exceptions\InvalidInputException.cs" />
+    <Compile Include="Helpers\EnumExtension.cs" />
+    <Compile Include="IVendingCash.cs" />
     <Compile Include="VendingCash.cs" />
     <Compile Include="VendingMachineState.cs" />
     <Compile Include="Program.cs" />

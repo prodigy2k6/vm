@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using VendingMachine.DTO;
 using NLog;
 
 namespace VendingMachine
 {
-    public class VendingCash
+    public class VendingCash : IVendingCash
     {
         internal SortedDictionary<Denomination, int> InternalCash { get; set; }
 
@@ -54,6 +55,31 @@ namespace VendingMachine
                 else
                     throw new Exception($"No {coin.Name} available in machine");
             }
+        }
+
+        public string ShowAvailableCash()
+        {
+            var stringBuilder = new StringBuilder();
+
+            if (InternalCash.Count == 0)
+                return "No coins have been added to the Vending Machine";
+
+            foreach (var coin in InternalCash)
+            {
+                stringBuilder.AppendLine($"{coin.Key} Count: {coin.Value}");
+            }
+
+            return stringBuilder.ToString();
+        }
+
+        public bool DenominationsAdded()
+        {
+            return InternalCash.Count == 0;
+        }
+
+        public bool OutOfCoins()
+        {
+            return InternalCash.All(x => x.Value == 0);
         }
 
         public bool CanReturnChange(decimal changeRequired)

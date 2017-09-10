@@ -4,7 +4,7 @@ namespace VendingMachine.DTO.Enums
 {
     public enum DenominationNames
     {
-        TwoPound,
+        TwoPound = 1,
         Pound,
         FiftyPence,
         TwentyPence,
