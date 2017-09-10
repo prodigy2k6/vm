@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using NLog;
 using VendingMachine.DTO;
@@ -201,21 +202,83 @@ namespace VendingMachine
             Console.WriteLine("Enter Product Name: ");
             var productName = Console.ReadLine();
 
-            if (!ProductExists(productName))
+            var productSelected = ProductExists(productName);
+
+            if (productSelected == null)
             {
                 Console.WriteLine("No such Product exists");
                 return;
             }
 
+            if (!ProductAvailable(productName))
+            {
+                Console.WriteLine("Product out of Stock");
+                return;
+            }
+
             Console.WriteLine("Enter Coins by name separated by ',' (Pound,Pound,FivePence) :");
             var coinNames = Console.ReadLine();
+
+            var payment = ProcessPaymentCoins(coinNames);
+
+            var totalPayment = payment.Sum(x => x.Value);
+
+            var priceDifference = totalPayment - productSelected.Price;
+
+            if (priceDifference < 0)
+            {
+                Console.WriteLine($"Payment {totalPayment} less than product price {productSelected.Price}");
+                return;
+            }
+
+            if (priceDifference == 0)
+            {
+                Console.WriteLine("Exact payment given. No Change to return");
+                cash.AddCoins(payment);
+                products[productSelected] -= 1;
+                Console.WriteLine($"{productName} bought successfully");
+                
+            }
+            else
+            {
+                var changeToReturn = cash.CanReturnChange(priceDifference, payment);
+
+                if (!changeToReturn.Success)
+                {
+                    Console.WriteLine($"Unable to provide enough change for selected Product {productName}");
+                    Console.WriteLine($"Change returned: {string.Join(",",payment)} ");
+                }
+                else
+                {
+                    products[productSelected] -= 1;
+                    Console.WriteLine($"{productName} bought successfully");
+                    Console.WriteLine($"Change returned: {string.Join(",", changeToReturn)} ");
+                }
+            }
+
+            Console.WriteLine(GetAvailableProducts());
+            Console.WriteLine(GetAvailableCash());
+            Console.ReadLine();
         }
 
         
-        private bool ProductExists(string productName)
+        private Product ProductExists(string productName)
         {
-            var productExists = products.ContainsKey(new Product { Name = productName });
-            return productExists;
+            try
+            {
+                var product = products.Keys.Single(x => x.Name.Equals(productName,StringComparison.InvariantCultureIgnoreCase));
+                return product;
+            }
+            catch (InvalidOperationException)
+            {
+                _logger.Error($"Product '{productName} not found'");
+                return null;
+            }
+        }
+
+        private bool ProductAvailable(string productName)
+        {
+            return products[new Product {Name = productName}] > 0;
         }
     }
 }
