@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using VendingMachine.DTO;
 
-namespace VendingMachine
+namespace VendingMachine.Interfaces
 {
     public interface IVendingCash
     {

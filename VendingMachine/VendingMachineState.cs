@@ -7,6 +7,7 @@ using VendingMachine.DTO;
 using VendingMachine.DTO.Enums;
 using VendingMachine.Exceptions;
 using VendingMachine.Helpers;
+using VendingMachine.Interfaces;
 
 namespace VendingMachine
 {

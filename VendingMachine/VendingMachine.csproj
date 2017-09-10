@@ -53,13 +53,12 @@
     <Compile Include="DTO\Product.cs" />
     <Compile Include="Exceptions\InvalidInputException.cs" />
     <Compile Include="Helpers\EnumExtension.cs" />
-    <Compile Include="IVendingCash.cs" />
-    <Compile Include="IVendingMachineState.cs" />
+    <Compile Include="Interfaces\IVendingCash.cs" />
+    <Compile Include="Interfaces\IVendingMachineState.cs" />
     <Compile Include="VendingCash.cs" />
     <Compile Include="VendingMachineState.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="VendingOptions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

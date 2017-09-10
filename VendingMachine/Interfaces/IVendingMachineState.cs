@@ -1,4 +1,4 @@
-﻿namespace VendingMachine
+﻿namespace VendingMachine.Interfaces
 {
     public interface IVendingMachineState
     {

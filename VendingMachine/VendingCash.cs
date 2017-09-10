@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using VendingMachine.DTO;
 using NLog;
+using VendingMachine.Interfaces;
 
 namespace VendingMachine
 {
