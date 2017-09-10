@@ -56,26 +56,6 @@ namespace VendingMachine
             return dictionary;
         }
 
-        public SortedDictionary<Denomination,int> CreateCoinDictionary(IEnumerable<Denomination> coins)
-        {
-            var coinDictionary = new SortedDictionary<Denomination, int>(new DenominationComparer());
-
-            foreach (var coin in coins)
-            {
-                if (coinDictionary.ContainsKey(coin))
-                {
-                    coinDictionary[coin]++;
-                    _logger.Debug($"Adding {coin.Name} coin to existing denomination");
-                }
-                else
-                {
-                    coinDictionary.Add(coin, 1);
-                    _logger.Debug($"Adding new {coin.Name} coin to cash");
-                }
-            }
-            return coinDictionary;
-        }
-
         public decimal CurrentTotal()
         {
             return InternalCash.Select(x => x.Key.Value * x.Value).Sum();
@@ -158,6 +138,7 @@ namespace VendingMachine
                     changeToReturn.Add(coin.Key);
                 }
 
+                //success so add new coins and remove change to be given
                 if (changeRequired == 0)
                 {
                     if (coinsAddedByUser != null)
