@@ -5,7 +5,7 @@ namespace VendingMachine
 {
     public class Program
     {
-        public static VendingMachineState VendingMachine = new VendingMachineState();
+        public static VendingMachineState VendingMachine = new VendingMachineState(new VendingCash());
 
         static void Main()
         {

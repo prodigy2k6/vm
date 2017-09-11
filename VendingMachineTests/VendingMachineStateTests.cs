@@ -15,7 +15,7 @@ namespace VendingMachineTest
         [TestCase(" fiftypence - 22")]
         public void VendingMachineState_ProcessString_Successful(string input)
         {
-            var vendingMachineState = new VendingMachineState();
+            var vendingMachineState = new VendingMachineState(new VendingCash());
 
             var inputCoins = vendingMachineState.ProcessInputCoins(input);
 
@@ -27,7 +27,7 @@ namespace VendingMachineTest
         [TestCase(" fiftypence - 22; TenPence-23")]
         public void VendingMachineState_ProcessString_Failed(string input)
         {
-            var vendingMachineState = new VendingMachineState();
+            var vendingMachineState = new VendingMachineState(new VendingCash());
 
             Assert.Throws<InvalidInputException>(() => vendingMachineState.ProcessInputCoins(input));
         }
@@ -35,7 +35,7 @@ namespace VendingMachineTest
         [Test]
         public void VendingMachineState_ProductExist()
         {
-            var vendingMachineState = new VendingMachineState
+            var vendingMachineState = new VendingMachineState(new VendingCash())
             {
                 Products = new Dictionary<Product, int>
                 {

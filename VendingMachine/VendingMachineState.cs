@@ -18,10 +18,10 @@ namespace VendingMachine
 
         private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-        public VendingMachineState()
+        public VendingMachineState(IVendingCash myVendingCash)
         {
             Products = new Dictionary<Product, int>();
-            Cash = new VendingCash();
+            Cash = myVendingCash;
         }
 
         public string GetAvailableProducts()
